@@ -1,3 +1,7 @@
+mq部署方案
+1、rocketmq 顺序消费记录
+一个master ，一个 brocker ，多个group ，多个topic，采用集群消费模式。
+注意 一个group 对应一个 topic。 生产者 和 消费者 可以有多个，但是 主题和分组 都是一对一的。这样保证了 消息在集群模式下 的 顺序存储 和消费。
 
  spring-cloud-stream3.1.1 整合 rocketmq5.1.4
  
