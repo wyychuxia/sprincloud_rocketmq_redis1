@@ -1,7 +1,8 @@
 
-
 import mq.FunctionConsumer;
 import mq.FunctionProduct;
+import mq.TaskConsumer;
+import mq.TaskProduct;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -16,10 +17,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 })
 @EnableFeignClients(basePackages="com.common.feign")
 @EnableDiscoveryClient
-@EnableBinding({FunctionConsumer.class, FunctionProduct.class})
-public class FuntionApplication {
+@EnableBinding({TaskConsumer.class, TaskProduct.class, FunctionConsumer.class, FunctionProduct.class})
+public class TaskApplication {
 public static void main( String[] args )
     {
- SpringApplication.run(FuntionApplication.class, args);
+ SpringApplication.run(TaskApplication.class, args);
     }
 }
