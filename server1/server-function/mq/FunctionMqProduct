@@ -1,7 +1,6 @@
 import common.MessageVO;
 import mq.FunctionProduct;
 import org.springframework.messaging.Message;
-import org.springframework.cloud.stream.annotation.StreamListener;
 
 @Component
 @Slf4j
