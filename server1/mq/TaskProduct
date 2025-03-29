@@ -1,1 +1,12 @@
+import org.springframework.cloud.stream.annotation.Output;
+import org.springframework.messaging.MessageChannel;
+public interface TaskProduct {
 
+ /**
+     * TASK生产FUNCTION任务执行结果信道
+     */
+
+ String OUTPUT_FUNCTION_TASK_RESULT = "output-function-task-result";
+    @Output(TaskProduct.OUTPUT_FUNCTION_TASK_RESULT)
+    MessageChannel sendFunctionTaskResult();
+}
