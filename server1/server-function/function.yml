@@ -1,1 +1,24 @@
-
+spring:
+  cloud: 
+    stream:
+      bindings:
+        input-function-task-result:
+          destination: function-task-result-topic-wyy #相当于RocketMQ中的topic需要知道消息应该发送到哪个主题
+          content-type: application/json # 内容格式。这里使用 JSON
+          group: function-task-result-group-wyy
+        output-task-queue:
+          destination: task-queue-topic-wyy
+          content-type: application/json
+      rocketmq:
+        binder:
+          name-server: 10.xx.xx.xx:9876
+        bindings:
+          input-function-task-result:
+            consumer:
+              enable: true #是否开启消费，默认为 true。本地测试时可关闭
+              broadcasting: false # 是否使用广播消费，默认为 false 使用集群消费
+              orderly: true #是否开启顺序消费
+          output-task-queue:
+            producer:
+              group: task-queue-group-wyy
+              sync: true  #是否同步发送消息，默认为 false 异步。
