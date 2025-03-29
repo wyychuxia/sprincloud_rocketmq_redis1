@@ -1,1 +1,12 @@
+import org.springframework.cloud.stream.annotation.Output;
+import org.springframework.messaging.MessageChannel;
 
+public interface FunctionProduct {
+ /**
+     * FUNCTION生产任务信道
+     */
+String OUTPUT_TASK_QUEUE = "output-task-queue";
+@Output(FunctionProduct.OUTPUT_TASK_QUEUE)
+   MessageChannel sendFunctionTask();
+
+}
