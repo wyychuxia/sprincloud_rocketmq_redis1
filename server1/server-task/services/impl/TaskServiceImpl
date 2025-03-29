@@ -1,1 +1,26 @@
 
+import function.mq.FunctionMqProduct;
+import org.apache.rocketmq.common.message.MessageConst;
+import org.springframework.messaging.support.MessageBuilder;
+
+public class TaskServiceImpl{
+
+ @Autowired
+    private FunctionMqProduct functionMqProduct;
+
+    public void runTask() {
+ log.error("task 消费function 发来的消息")
+
+    }
+
+private void sendMessage(TaskResult taskResult){
+ log.error("task 发送消息给function")
+MessageVO messageVO = new MessageVO();
+           messageVO.setType(MessageType.FUNCTION);
+       messageVO.setStatus(status);
+  functionMqProduct.sendFunctionTaskResult(MessageBuilder.withPayload(messageVO)
+          .setHeader(MessageConst.PROPERTY_KEYS,taskResult.getTaskAppId())
+                            .build());
+ }
+
+}
