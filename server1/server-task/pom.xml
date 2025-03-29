@@ -1,1 +1,5 @@
 
+<dependency>
+            <groupId>mq</groupId>
+            <artifactId>mq</artifactId>
+        </dependency>
