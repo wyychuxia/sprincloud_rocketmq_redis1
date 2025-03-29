@@ -23,4 +23,16 @@ MessageVO messageVO = new MessageVO();
                             .build());
  }
 
+  public void runTask1() {
+  log.error("模拟获取任务锁")
+String  deviceStr = jsonObject.getInteger("id")+"_"+jsonObject.getInteger("type");
+ String lockDeviceKey = String.format("%s:%s:%s", RedisKeys.LOCK_REDIS, RedisKeys.DEVICE_OCCUPY_DEVICE, deviceStr);
+ RLock deviceLock = redisson.getLock(lockDeviceKey);
+ deviceLock.lock(60*10, TimeUnit.SECONDS);
+ log.info("task runTask 获取 设备占用锁:{} 成功 线程编号:{} ", lockDeviceKey, Thread.currentThread().getId());
+
+ releaseLock(deviceLock , lockDeviceKey);
+
+    }
+
 }
