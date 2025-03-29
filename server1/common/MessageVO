@@ -1,1 +1,13 @@
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class MessageVO implements Serializable {
+ private static final long serialVersionUID = 1L;
+@Schema(description = "taskAppId", example = "1")
+ @Schema(description = "平台类型", example = "0")
+    private Integer type;
+
+    @Schema(description = "status")
+    private String status;
+}
