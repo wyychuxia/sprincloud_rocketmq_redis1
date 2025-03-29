@@ -7,7 +7,7 @@ spring:
           content-type: application/json # 内容格式。这里使用 JSON
           group: task-queue-group-wyy
           consumer: 
-            concurrency: 5
+            concurrency: 5 # 消费者 并发线程数量5个
             #max-attempts: 1
             maxAttempts: 1
         output-function-task-result:
