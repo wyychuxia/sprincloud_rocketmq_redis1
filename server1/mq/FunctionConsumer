@@ -1,1 +1,14 @@
 
+import org.springframework.cloud.stream.annotation.Input;
+import org.springframework.messaging.SubscribableChannel;
+public interface FunctionConsumer {
+
+/**
+     * FUNCTION监听TASK任务执行结果信道
+     */
+
+String INPUT_FUNCTION_TASK_RESULT = "input-function-task-result";
+@Input(FunctionConsumer.INPUT_FUNCTION_TASK_RESULT)
+    SubscribableChannel receiveFunctionTaskResult();
+
+}
