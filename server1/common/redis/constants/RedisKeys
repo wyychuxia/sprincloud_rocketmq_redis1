@@ -1,1 +1,14 @@
-
+  ///////////////////////      默认初始化常量 ///////////
+/**
+     * redis锁  固定前缀:key 中的固定前缀
+     */
+public static final String LOCK_REDIS = "lock_redis";
+/**
+     * redis常量key  固定前缀:key 中的固定前缀
+     */
+ public static final String KEY_REDIS = "key_redis";
+ /////////////////////////////////// 自定义锁key /////
+ /**
+     * 占用device锁
+     */
+public static final String DEVICE_OCCUPY_DEVICE =  "device:occupy_device";
