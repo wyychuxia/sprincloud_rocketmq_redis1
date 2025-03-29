@@ -1,1 +1,13 @@
+import org.springframework.data.redis.core.RedisTemplate;
 
+public abstract class AbstractBaseRedisDao<K, V> {
+ @Resource(name = "redisTemplate")
+    protected RedisTemplate<K, V> redisTemplate;
+/**
+     * 设置redisTemplate
+     */
+ public void setRedisTemplate(RedisTemplate<K, V>  redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
+
+}
