@@ -1,1 +1,25 @@
 
+
+import mq.FunctionConsumer;
+import mq.FunctionProduct;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+
+@SpringBootApplication
+@EnableAspectJAutoProxy
+@MapperScan(basePackages = {
+        "com.xx"
+})
+@ComponentScan(basePackages = {
+        "com.xx"
+})
+@EnableFeignClients(basePackages="com.common.feign")
+@EnableDiscoveryClient
+@EnableBinding({FunctionConsumer.class, FunctionProduct.class})
+public class FuntionApplication {
+public static void main( String[] args )
+    {
+ SpringApplication.run(FuntionApplication.class, args);
+    }
+}
