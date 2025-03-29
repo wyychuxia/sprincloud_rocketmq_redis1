@@ -1,1 +1,32 @@
+import java.nio.charset.StandardCharsets;
+import common.MessageVO;
+import mq.TaskConsumer;
+import org.apache.rocketmq.common.message.MessageConst;
+import org.springframework.messaging.Message;
+import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.messaging.support.MessageBuilder;
 
+@Component
+@Slf4j
+public class TaskQueueConsumer {
+ @Autowired
+    private  FunctionMqProduct functionMqProduct;
+ @Autowired
+    private  TaskService taskService;
+
+ @StreamListener(TaskConsumer.INPUT_TASK_QUEUE)
+    public void taskQueue(Message<?> message) {
+        try {
+String content = new String((byte[]) message.getPayload(), StandardCharsets.UTF_8);
+            MessageVO messageVO = JsonUtil.str2Obj(content, MessageVO.class);
+            log.info("task consumer 消息内容：{}", messageVO);
+ //1、创建任务
+taskService.saveTask(taskDTO);
+//2、执行任务，可单独执行
+ taskService.runTask();
+
+        } catch (RuntimeException e){
+            log.error("task consumer 入库失败：{}", e.getMessage());
+     }
+
+}
