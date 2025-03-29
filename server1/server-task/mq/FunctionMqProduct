@@ -1,1 +1,25 @@
 
+import common.MessageVO;
+import mq.TaskProduct;
+import org.springframework.messaging.Message;
+
+@Component
+@Slf4j
+public class FunctionMqProduct {
+ @Autowired
+    private TaskProduct taskProduct;
+
+    public boolean sendFunctionTaskResult(Message<?> message){
+            boolean flag = false;
+        try {
+            flag = taskProduct.sendFunctionTaskResult().send(message);
+            log.info("task function product 线程编号：{} 消息内容：{} 发送结果：{}",  Thread.currentThread().getId(), message, flag);
+            return flag;
+
+        } catch (Exception e){
+            log.error("task function product 发送mq消息失败 线程编号：{} 异常信息:{} 消息内容：{}",Thread.currentThread().getId(), e.getMessage(),message);
+          }
+     return flag;
+
+     } 
+}
