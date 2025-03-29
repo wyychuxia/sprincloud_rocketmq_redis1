@@ -1,1 +1,13 @@
 
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.ValueOperations;
+@Repository("redisDao")
+@Slf4j
+public class RedisDaoImpl extends AbstractBaseRedisDao<Object, Object> {
+ @Override
+    public boolean existsKey(final Object key) {
+        return redisTemplate.hasKey(key);
+    }
+
+}
