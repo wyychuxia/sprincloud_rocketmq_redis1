@@ -1,1 +1,25 @@
+import common.MessageVO;
+import mq.FunctionConsumer;
+import org.springframework.messaging.Message;
+import org.springframework.cloud.stream.annotation.StreamListener;
 
+@Component
+@Slf4j
+public class FunctionMqConsumer {
+ @Autowired
+    private FunctionTaskService functionTaskService;
+/**
+     * function监听task任务执行结果
+     */
+@StreamListener(FunctionConsumer.INPUT_FUNCTION_TASK_RESULT)
+    public void receiveFunctionTaskResult(Message<?> message) {
+        try {
+String content = new String((byte[]) message.getPayload(), StandardCharsets.UTF_8);
+            MessageVO messageVO = JsonUtil.str2Obj(content, MessageVO.class);
+            log.info("function consumer 消息内容：{}", messageVO);
+functionTaskService.saveFunctionResultDetail(functionTaskDTO);
+        } catch (RuntimeException e){
+            log.error("function consumer 入库失败：{}", e.getMessage());
+     }
+
+}
