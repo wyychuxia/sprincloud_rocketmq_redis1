@@ -1,1 +1,24 @@
+import common.MessageVO;
+import mq.FunctionProduct;
+import org.springframework.messaging.Message;
+import org.springframework.cloud.stream.annotation.StreamListener;
 
+@Component
+@Slf4j
+public class FunctionMqProduct {
+ @Autowired
+    private FunctionProduct functionProduct;
+
+    public boolean sendFunctionTask(Message<?> message){
+            boolean flag = false;
+        try {
+            flag = functionProduct.sendFunctionTask().send(message);
+            log.info("function product 消息内容：{} 发送结果：{}", message, flag);
+            return flag;
+
+        } catch (Exception e){
+            log.error("function product 发送mq消息失败 异常信息:{} 消息内容：{}",e.getMessage(),message);
+          }
+
+     } 
+}
