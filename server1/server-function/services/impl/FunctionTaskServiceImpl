@@ -1,1 +1,28 @@
 
+import function.mq.FunctionMqProduct;
+import org.apache.rocketmq.common.message.MessageConst;
+import org.springframework.messaging.support.MessageBuilder;
+
+public class FunctionTaskServiceImpl{
+
+ @Autowired
+    private FunctionMqProduct functionMqProduct;
+
+public RespModel<String> runFunctionTask(int id){
+
+//3、发送任务到task调度中心
+MessageVO messageVO = new MessageVO();
+    messageVO.setTaskAppId(functionTask.getId());
+messageVO.setType(MessageType.FUNCTION);
+messageVO.setStatus(ResultStatusEnum.RUNNING.getValue());
+ functionMqProduct.sendFunctionTask(MessageBuilder.withPayload(messageVO)
+                .setHeader(MessageConst.PROPERTY_KEYS,messageVO.getTaskAppId())
+                .build());
+  }
+
+public void saveFunctionResultDetail(FunctionTask functionTask){
+
+   log.error("function 消费消息")
+}
+
+}
